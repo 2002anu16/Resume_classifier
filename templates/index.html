@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV Resume Classifier (LSTM)</title>
+    <style>
+        body {
+            background-color: #ffe6f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: #f3e8ff;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #4b0082;
+        }
+        input[type="file"], input[type="submit"] {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #6a0dad;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #5a0099;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #d9b3ff;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #4b0082;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Resume Classifier</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="resume" accept=".csv" required>
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if predictions %}
+            <h3>Predicted Roles:</h3>
+            <table>
+                <tr>
+                    <th>Resume Text</th>
+                    <th>Predicted Role</th>
+                </tr>
+                {% for row in predictions %}
+                <tr>
+                    <td>{{ row[0][:100] }}...</td>
+                    <td>{{ row[1] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>
+    
